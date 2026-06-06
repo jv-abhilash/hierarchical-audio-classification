@@ -1,0 +1,27 @@
+# 3-Class Hierarchical Acoustic CRNN
+# Python 3.12
+# GPU: NVIDIA RTX 5070 Ti, CUDA 12.8
+
+# Deep Learning
+# Install with: pip install --pre torch torchaudio --index-url https://download.pytorch.org/whl/nightly/cu128
+torch>=2.12.0.dev0
+torchaudio>=2.12.0.dev0
+
+# Audio Processing
+librosa==0.11.0
+soundfile>=0.12.1
+
+# Data & Numerics
+numpy>=2.4.6
+pandas>=2.0.0
+scikit-learn>=1.3.0
+
+# Visualisation
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Training utilities
+tqdm>=4.65.0
+
+# Hyperparameter optimisation (optional — for Optuna tuning)
+optuna>=3.0.0

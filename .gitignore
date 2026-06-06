@@ -1,0 +1,53 @@
+# ── AUDIO DATASET — too large for GitHub ──────────────────
+final_dataset/
+dataset/
+
+# ── MODEL CHECKPOINTS — large binary files ─────────────────
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+
+# ── TRAINING LOGS ──────────────────────────────────────────
+logs/
+
+# ── PYTHON ─────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# ── JUPYTER ────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── OS ─────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE ────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── EDA OUTPUTS ────────────────────────────────────────────
+*.png
+*.jpg
+*.jpeg
+advanced_eda/
+eda/
+
+.claude
+
+*.docx
+*/*.docx
+
+*.pdf
+*/*.pdf
