@@ -312,7 +312,7 @@ def model_summary(model: nn.Module):
     """Print model architecture summary."""
     print("\n── Model Summary ──────────────────────────────────────")
     print(f"  Architecture: Hierarchical CRNN")
-    print(f"  Input shape:  (batch, 1, {cfg.N_MELS}, {cfg.TIME_FRAMES})")
+    print(f"  Input shape:  (batch, {cfg.CNN_CHANNELS[0]}, {cfg.N_MELS}, {cfg.TIME_FRAMES})")
     print()
 
     print(f"  CNN Encoder:")
@@ -362,7 +362,7 @@ if __name__ == "__main__":
     # Forward pass with random input
     print("\n── Forward pass test ──")
     batch_size = 4
-    x = torch.randn(batch_size, 1, cfg.N_MELS,
+    x = torch.randn(batch_size, cfg.CNN_CHANNELS[0], cfg.N_MELS,
                     cfg.TIME_FRAMES).to(cfg.DEVICE)
     print(f"  Input shape:  {x.shape}")
 
@@ -382,7 +382,7 @@ if __name__ == "__main__":
     # Test predict method
     print("\n── Predict method test ──")
     model.eval()
-    x_single = torch.randn(1, 1, cfg.N_MELS,
+    x_single = torch.randn(1, cfg.CNN_CHANNELS[0], cfg.N_MELS,
                            cfg.TIME_FRAMES).to(cfg.DEVICE)
     result = model.predict(x_single)
     print(f"  Predicted main:  {result['main_class']} "

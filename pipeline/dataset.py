@@ -87,10 +87,36 @@ def time_mask(spec: torch.Tensor, max_mask: int, num_masks: int) -> torch.Tensor
 
 
 def spec_augment(spec: torch.Tensor) -> torch.Tensor:
-    """Apply SpecAugment: frequency masking + time masking."""
+    """Apply SpecAugment: frequency masking + time masking. Single channel."""
     spec = freq_mask(spec, cfg.FREQ_MASK_PARAM, cfg.NUM_FREQ_MASKS)
     spec = time_mask(spec, cfg.TIME_MASK_PARAM, cfg.NUM_TIME_MASKS)
     return spec
+
+
+def spec_augment_3ch(spec: torch.Tensor) -> torch.Tensor:
+    """
+    Apply SpecAugment to 3-channel spectrogram (mel, delta, delta2).
+    Same mask applied to all 3 channels — masks must be consistent
+    across channels since they represent the same time-frequency region.
+    spec shape: (3, 128, 216)
+    """
+    n_mels = spec.shape[1]
+    n_time = spec.shape[2]
+    cloned = spec.clone()
+
+    # Frequency masks — same position across all 3 channels
+    for _ in range(cfg.NUM_FREQ_MASKS):
+        f  = random.randint(0, cfg.FREQ_MASK_PARAM)
+        f0 = random.randint(0, n_mels - f)
+        cloned[:, f0:f0+f, :] = 0.0   # zero all 3 channels
+
+    # Time masks — same position across all 3 channels
+    for _ in range(cfg.NUM_TIME_MASKS):
+        t  = random.randint(0, cfg.TIME_MASK_PARAM)
+        t0 = random.randint(0, n_time - t)
+        cloned[:, :, t0:t0+t] = 0.0   # zero all 3 channels
+
+    return cloned
 
 
 # ── AUDIO PROCESSING ──────────────────────────────────────────────────────────
